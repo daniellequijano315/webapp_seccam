@@ -30,7 +30,7 @@ const navigation = {
 const supportLinks = [
   {
     name: "Access Surveillance System",
-    href: "#",
+    href: "/accessSurveillanceSystem",
     description: "Be secure, be aware. Be security aware.",
     urlname: "Enter the portal",
     icon: CameraIcon,

@@ -22,3 +22,91 @@ body {
 .pt-18 {
   padding-top: 64px /* 80px */;
 }
+
+.loader {
+  border: 16px solid #f3f3f3;
+ 
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.dots-3 {
+  width: 69px;
+  height: 36px;
+  --c:radial-gradient(farthest-side,currentColor 90%,#0000);
+  background:var(--c), var(--c), var(--c), var(--c);
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  animation:d3 1s infinite linear; 
+}
+
+@keyframes d3 {
+  0%     {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+  16.67% {background-position: calc(0*100%/3) 0   ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+  33.33% {background-position: calc(0*100%/3) 100%,calc(1*100%/3) 0   ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+  50%    {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 100%,calc(2*100%/3) 0   ,calc(3*100%/3) 50% }
+  66.67% {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 100%,calc(3*100%/3) 0   }
+  83.33% {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 100%}
+  100%   {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+}
+
+.full {
+  position:fixed;
+ 
+  inset:0;
+  z-index:116;
+  display: grid;
+  background:#fff;
+
+}
+.full:before {
+  content:"";
+  grid-area:1/1;
+  --s:67px; /* shape size */
+  --m:4px;  /* line thickness */
+  
+
+  --v1: #fff 119.5deg, #0000 120.5deg;
+  --v2: #000  119.5deg, #0000 120.5deg;
+  background:
+    conic-gradient(at var(--m)              calc(var(--s)*0.5777), transparent 270deg, #000 0deg),
+    conic-gradient(at calc(100% - var(--m)) calc(var(--s)*0.5777), #000 90deg,  transparent 0deg),
+    conic-gradient(from -60deg at 50% calc(var(--s)*0.8662)             , var(--v1)),
+    conic-gradient(from -60deg at 50% calc(var(--s)*0.8662 + 2*var(--m)), var(--v2)),
+    conic-gradient(from 120deg at 50% calc(var(--s)*1.4435 + 3*var(--m)), var(--v1)),
+    conic-gradient(from 120deg at 50% calc(var(--s)*1.4435 +   var(--m)), var(--v2)),
+    linear-gradient(90deg, #fff calc(50% - var(--m)),#000 0 calc(50% + var(--m)), #fff 0);
+  background-size: calc(var(--s) + 2*var(--m)) calc(var(--s)*1.732 + 3*var(--m)); 
+  -webkit-mask:linear-gradient(-60deg,#0000 calc(50% - 4*var(--s)),#000,#0000 calc(50% + 4*var(--s))) right/300% 100% no-repeat;
+  animation:f 3s infinite linear;
+}
+.full:after {
+  content:"Entering the Surveillance Camera Portal";
+  grid-area:1/1;
+  font-family:monospace;
+  font-weight:bold;
+  font-size:12vmin;
+  text-align: center;
+  margin:auto;
+  mix-blend-mode:difference;
+  color: #fff;
+}
+
+@keyframes f {
+  100% {-webkit-mask-position:left}
+}

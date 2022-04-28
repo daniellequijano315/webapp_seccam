@@ -1,4 +1,4 @@
-/* This example requires Tailwind CSS v2.0+ */
+import axios from "axios"
 const list = [
   {
     keyid: "1",
@@ -9,10 +9,12 @@ const list = [
     image:
       "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
-  // More people...
+ 
 ]
 
 export default function Table() {
+  
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -30,7 +32,7 @@ export default function Table() {
             type="button"
             className="inline-flex items-center justify-center rounded-md border border-transparent bg-yellow-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 sm:w-auto"
           >
-            Add 
+            Add
           </button>
         </div>
       </div>
@@ -95,7 +97,6 @@ export default function Table() {
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         <div className="text-gray-900">{capture.date}</div>
-                      
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
@@ -118,7 +119,8 @@ export default function Table() {
                           href="#"
                           className="text-yellow-600 hover:text-yellow-900 px-2"
                         >
-                          Delete <span className="sr-only">, {capture.name}</span>
+                          Delete{" "}
+                          <span className="sr-only">, {capture.name}</span>
                         </a>
                         <a
                           href="#"

@@ -12,9 +12,12 @@
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@heroicons/vue": "^1.0.6",
+    "axios": "^0.27.2",
     "next": "12.1.5",
+    "nextjs-cors": "^2.1.1",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "react-modal-image": "^2.5.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.4",

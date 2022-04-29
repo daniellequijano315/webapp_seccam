@@ -118,6 +118,10 @@ export default function dashboard(props) {
                           </td>
 
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <meta
+                              http-equiv="Content-Security-Policy"
+                              content="upgrade-insecure-requests"
+                            />
                             <div className=" items-center grid grid-cols-1">
                               <ModalImage
                                 className="h-10 w-10 rounded-full"

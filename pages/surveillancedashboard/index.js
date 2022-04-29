@@ -2,7 +2,7 @@ import Navbar from "../../components/Container/navbar"
 import { Fragment, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import ModalImage from "react-modal-image"
-/* This example requires Tailwind CSS v2.0+ */
+import Moment from "react-moment"
 
 import { CheckIcon } from "@heroicons/react/outline"
 
@@ -16,46 +16,10 @@ export async function getServerSideProps() {
   // Pass data to the page via props
   return { props: { data } }
 }
-const list = [
-  {
-    keyid: "1",
-    date: "April 28 12pm",
 
-    rfuid: "HelloHelloPoKamusta",
-
-    image:
-      "https://res.cloudinary.com/tip/image/upload/v1650897283/finalproject_embeddedsystem/Quijano_Danielle_Mark_O_11r_jit5m2.jpg",
-  },
-  {
-    keyid: "2",
-    date: "April 28 12pm",
-
-    rfuid: "HelloHelloPoKamusta",
-
-    image:
-      "https://res.cloudinary.com/tip/image/upload/v1650897221/finalproject_embeddedsystem/278977461_281781630699174_2557961964329566459_n_paytlg.png",
-  },
-  {
-    keyid: "3",
-    date: "April 28 12pm",
-
-    rfuid: "HelloHelloPoKamusta",
-
-    image:
-      "https://res.cloudinary.com/tip/image/upload/v1650871279/finalproject_embeddedsystem/241782748_10215973074360039_3223906419357501925_n_a0blei.jpg",
-  },
-]
 export default function dashboard(props) {
-  const [open, setOpen] = useState(false)
-  function closeModalReady() {
-    setOpen(false)
-  }
-
-  function openModalReady() {
-    setOpen(true)
-  }
-  const raspi = props.data
-  console.log("DATA", raspi)
+  const list = props.data
+  console.log("DATA", list)
   return (
     <div className="bg-white">
       <Navbar />
@@ -71,12 +35,12 @@ export default function dashboard(props) {
             </p>
           </div>
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-            <button
+            {/*   <button
               type="button"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-yellow-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 sm:w-auto"
             >
               Add
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="mt-8 flex flex-col">
@@ -125,48 +89,56 @@ export default function dashboard(props) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {list.map((capture) => (
-                      <tr key={capture.email}>
-                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                          <div className="flex items-center">
-                            <div className="h-10 w-10 flex-shrink-0"></div>
-                            <div className="ml-4">
-                              <div className="font-medium text-gray-900">
-                                {capture.keyid}
-                              </div>
-                              <div className="text-gray-500">
-                                {capture.email}
+                    {list != null ? (
+                      list.map((capture) => (
+                        <tr key={capture.email}>
+                          <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                            <div className="flex items-center">
+                              <div className="h-10 w-10 flex-shrink-0"></div>
+                              <div className="ml-4">
+                                <div className="font-medium text-gray-900">
+                                  {capture.pkey}
+                                </div>
+                                <div className="text-gray-500">
+                                  {capture.email}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          <div className="text-gray-900">{capture.date}</div>
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                            Active
-                          </span>
-                        </td>
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <div className="text-gray-900">
+                              {" "}
+                              <Moment local>{capture.datetime}</Moment>
+                            </div>
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                              Active
+                            </span>
+                          </td>
 
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          <div className=" items-center grid grid-cols-1">
-                            <ModalImage
-                              className="h-10 w-10 rounded-full"
-                              small={capture.image}
-                              large={capture.image}
-                              alt={capture.keyid}
-                              showRotate={true}
-                            ></ModalImage>
-                            <div className="text-yellow-600 hover:text-yellow-900 ml-1 ">
-                              View
+                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <div className=" items-center grid grid-cols-1">
+                              <ModalImage
+                                className="h-10 w-10 rounded-full"
+                                small={`http://afe47cabd8457497fbc403ec51c1c83a-1958255376.ap-east-1.elb.amazonaws.com:9001/images/${capture.picture}`}
+                                large={`http://afe47cabd8457497fbc403ec51c1c83a-1958255376.ap-east-1.elb.amazonaws.com:9001/images/${capture.picture}`}
+                                alt={capture.keyid}
+                                showRotate={true}
+                              ></ModalImage>
+                              <div className="text-yellow-600 hover:text-yellow-900 ml-1 ">
+                                View
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {capture.rfuid}
-                        </td>
-                        <td className="relative  whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            {capture.rfuid}
+                          </td>
+                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            <Moment fromNow>{capture.datetime}</Moment>
+                          </td>
+
+                          {/*      <td className="relative  whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                           <a
                             href="#"
                             className="text-yellow-600 hover:text-yellow-900 px-2"
@@ -174,9 +146,14 @@ export default function dashboard(props) {
                             Delete{" "}
                             <span className="sr-only">, {capture.name}</span>
                           </a>
-                        </td>
-                      </tr>
-                    ))}
+                        </td> */}
+                        </tr>
+                      ))
+                    ) : (
+                      <div className="text-center text-xl">
+                        NO DATA AVAILABLE
+                      </div>
+                    )}
                   </tbody>
                 </table>
               </div>

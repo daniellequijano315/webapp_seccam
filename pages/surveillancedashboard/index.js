@@ -8,18 +8,33 @@ import { CheckIcon } from "@heroicons/react/outline"
 
 export async function getServerSideProps() {
   // Fetch data from external API
+
   const res = await fetch(
     "http://afe47cabd8457497fbc403ec51c1c83a-1958255376.ap-east-1.elb.amazonaws.com:9001/seccam/view"
   )
-  const data = await res.json()
+  console.log("RES", res)
+  if (res.status == 200) {
+    const data = await res.json()
+    return { props: { data } }
+  } else {
+    const data = [
+      {
+        pkey: "Empty-No Data Available from the Database",
+        datetime: "Empty-No Data Available",
+        picture: "Empty-No Data Available",
+        rfuid: "Empty-No Data Available",
+      },
+    ]
+    return { props: { data } }
+  }
 
   // Pass data to the page via props
-  return { props: { data } }
 }
 
 export default function dashboard(props) {
   const list = props.data
-  console.log("DATA", list)
+
+  console.log("DATA", list.length)
   return (
     <div className="bg-white">
       <Navbar />
@@ -89,60 +104,59 @@ export default function dashboard(props) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {list != null ? (
-                      list.map((capture) => (
-                        <tr key={capture.email}>
-                          <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                            <div className="flex items-center">
-                              <div className="h-10 w-10 flex-shrink-0"></div>
-                              <div className="ml-4">
-                                <div className="font-medium text-gray-900">
-                                  {capture.pkey}
-                                </div>
-                                <div className="text-gray-500">
-                                  {capture.email}
-                                </div>
+                    {list.map((capture) => (
+                      <tr key={capture.email}>
+                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                          <div className="flex items-center">
+                            <div className="h-10 w-10 flex-shrink-0"></div>
+                            <div className="ml-4">
+                              <div className="font-medium text-gray-900">
+                                {capture.pkey}
+                              </div>
+                              <div className="text-gray-500">
+                                {capture.email}
                               </div>
                             </div>
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <div className="text-gray-900">
-                              {" "}
-                              <Moment local>{capture.datetime}</Moment>
-                            </div>
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                              Active
-                            </span>
-                          </td>
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          <div className="text-gray-900">
+                            {" "}
+                            <Moment local>{capture.datetime}</Moment>
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                            Active
+                          </span>
+                        </td>
 
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <meta
-                              http-equiv="Content-Security-Policy"
-                              content="upgrade-insecure-requests"
-                            />
-                            <div className=" items-center grid grid-cols-1">
-                              <ModalImage
-                                className="h-10 w-10 rounded-full"
-                                small={`http://afe47cabd8457497fbc403ec51c1c83a-1958255376.ap-east-1.elb.amazonaws.com:9001/images/${capture.picture}`}
-                                large={`http://afe47cabd8457497fbc403ec51c1c83a-1958255376.ap-east-1.elb.amazonaws.com:9001/images/${capture.picture}`}
-                                alt={capture.keyid}
-                                showRotate={true}
-                              ></ModalImage>
-                              <div className="text-yellow-600 hover:text-yellow-900 ml-1 ">
-                                View
-                              </div>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          <meta
+                            http-equiv="Content-Security-Policy"
+                            content="upgrade-insecure-requests"
+                          />
+                          <div className=" items-center grid grid-cols-1">
+                            <ModalImage
+                              className="h-10 w-10 rounded-full"
+                              small={`http://afe47cabd8457497fbc403ec51c1c83a-1958255376.ap-east-1.elb.amazonaws.com:9001/images/${capture.picture}`}
+                              large={`http://afe47cabd8457497fbc403ec51c1c83a-1958255376.ap-east-1.elb.amazonaws.com:9001/images/${capture.picture}`}
+                              alt={capture.keyid}
+                              showRotate={true}
+                            ></ModalImage>
+                            <div className="text-yellow-600 hover:text-yellow-900 ml-1 ">
+                              View
                             </div>
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {capture.rfuid}
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <Moment fromNow>{capture.datetime}</Moment>
-                          </td>
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          {capture.rfuid}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          <Moment fromNow>{capture.datetime}</Moment>
+                        </td>
 
-                          {/*      <td className="relative  whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                        {/*      <td className="relative  whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                           <a
                             href="#"
                             className="text-yellow-600 hover:text-yellow-900 px-2"
@@ -151,13 +165,8 @@ export default function dashboard(props) {
                             <span className="sr-only">, {capture.name}</span>
                           </a>
                         </td> */}
-                        </tr>
-                      ))
-                    ) : (
-                      <div className="text-center text-xl">
-                        NO DATA AVAILABLE
-                      </div>
-                    )}
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

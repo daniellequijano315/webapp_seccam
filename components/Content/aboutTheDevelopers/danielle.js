@@ -80,6 +80,7 @@ export default function Danielle() {
                 Intelligence Engineer from his Previous Company.
               </p>
             </div>
+            
             <div className="mt-5 prose prose-indigo text-gray-500 mx-auto lg:max-w-none lg:row-start-1 lg:col-start-1">
               <p>
                 Danielle Mark Quijano is currently taking his Master's degree in

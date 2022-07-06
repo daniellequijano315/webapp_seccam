@@ -74,12 +74,10 @@ export default function Danielle() {
           <div className="mt-8 lg:mt-0">
             <div className="text-base max-w-prose mx-auto lg:max-w-none">
               <p className="text-lg text-gray-500">
-                Professionally, Danielle Mark Quijano is now a Full-time
-                Embedded System engineer at the University of Philippines
-                Diliman in National Engineering Center Quezon City under the
-                name of SmartFox Data Solution Inc. and Bolt Graphics Inc. He
-                also had work experience before as a Frontend Web Developer and
-                Artificial Intelligence Engineer from his Previous Company.
+                Professionally, Danielle Mark Quijano is now a Full-time Digital
+                Design Engineer at Bolt Graphics Inc. He also had work
+                experience before as a Frontend Web Developer and Artificial
+                Intelligence Engineer from his Previous Company.
               </p>
             </div>
             <div className="mt-5 prose prose-indigo text-gray-500 mx-auto lg:max-w-none lg:row-start-1 lg:col-start-1">
